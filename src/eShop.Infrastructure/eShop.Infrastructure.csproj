@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="EventStore.Client.Grpc.Streams" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\eShop.Application\eShop.Application.csproj" />
+        <ProjectReference Include="..\eShop.Common\eShop.Common.csproj" />
+        <ProjectReference Include="..\eShop.Domain\eShop.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

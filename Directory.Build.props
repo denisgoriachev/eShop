@@ -1,0 +1,9 @@
+<Project>
+    <PropertyGroup>
+        <Version>0.1</Version>
+        <FileVersion>0.1</FileVersion>
+        <WarningsAsErrors>True</WarningsAsErrors>
+        <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+        <ManagePackageVersionsCentrally>True</ManagePackageVersionsCentrally>
+    </PropertyGroup>
+</Project>
