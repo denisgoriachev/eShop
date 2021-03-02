@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <UserSecretsId>42144253-5b06-48b9-be05-1015fc8377d5</UserSecretsId>
-        <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <DockerfileContext>..\..</DockerfileContext>
         <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
     </PropertyGroup>
@@ -11,6 +11,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
         <PackageReference Include="Swashbuckle.AspNetCore" />
+        <PackageReference Include="Serilog.AspNetCore" />
     </ItemGroup>
 
     <ItemGroup>

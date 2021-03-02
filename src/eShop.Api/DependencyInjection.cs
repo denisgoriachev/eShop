@@ -1,4 +1,5 @@
-﻿using eShop.Api.Services;
+﻿using eShop.Api.Filters;
+using eShop.Api.Services;
 using eShop.Application.Service;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,8 +17,12 @@ namespace eShop.Api
         {
             services.AddHttpContextAccessor();
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
+            services.AddSingleton<IIdentityService, IdentityService>();
 
-            services.AddControllers();
+            services.AddControllers(options => {
+                options.Filters.Add<ApiExceptionFilterAttribute>();
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "eShop.Api", Version = "v1" });
