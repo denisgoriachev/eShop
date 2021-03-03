@@ -7,7 +7,15 @@ services:
     build:
       context: .
       dockerfile: src/eShop.Api/Dockerfile
-  eventstore-db:
+
+  eshop-auth:
+    container_name: eshop-auth
+    image: ${DOCKER_REGISTRY-}eshopauth
+    build:
+      context: .
+      dockerfile: src/eShop.Auth/Dockerfile
+
+  eshop-esdb:
     container_name: eshop-esdb
     image: eventstore/eventstore:20.10.0-buster-slim
     environment:
@@ -30,6 +38,9 @@ services:
         source: eventstore-volume-logs
         target: /var/log/eventstore
 
+
+
 volumes:
   eventstore-volume-data:
   eventstore-volume-logs:   
+

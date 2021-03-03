@@ -3,9 +3,11 @@ using eShop.Api.Services;
 using eShop.Application.Service;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +17,39 @@ namespace eShop.Api
     {
         public static IServiceCollection AddApi(this IServiceCollection services, IConfiguration configuration)
         {
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultScheme = "Cookies";
+                    options.DefaultChallengeScheme = "oidc";
+                })
+                .AddCookie("Cookies")
+                .AddOpenIdConnect("oidc", options =>
+                {
+                    options.Authority = "http://localhost:5101";
+
+                    // This will allow the container to reach the discovery endpoint
+                    options.MetadataAddress = "http://eshop-auth/.well-known/openid-configuration";
+                    options.RequireHttpsMetadata = false;
+
+                    options.Events.OnRedirectToIdentityProvider = context =>
+                    {
+                        // Intercept the redirection so the browser navigates to the right URL in your host
+                        context.ProtocolMessage.IssuerAddress = "http://localhost:5001/connect/authorize";
+                        return Task.CompletedTask;
+                    };
+
+                    options.ClientId = "eshop-api";
+                    options.ClientSecret = "secret";
+                    options.ResponseType = "code";
+
+                    options.SaveTokens = true;
+
+                    options.Scope.Add("profile");
+                    options.GetClaimsFromUserInfoEndpoint = true;
+                });
+
             services.AddHttpContextAccessor();
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddSingleton<IIdentityService, IdentityService>();

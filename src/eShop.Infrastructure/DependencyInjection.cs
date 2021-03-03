@@ -24,7 +24,7 @@ namespace eShop.Infrastructure
 {
     public static class DependencyInjection
     {
-        static Regex _versionRegex = new Regex(@"V\d*");
+        static readonly Regex _versionRegex = new Regex(@"V\d*");
 
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {

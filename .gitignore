@@ -361,3 +361,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 src/eShop.Api/eShopProjectionDatabase.db
+src/eShop.Auth/tempkey.jwk
