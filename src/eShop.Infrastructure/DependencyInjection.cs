@@ -1,15 +1,20 @@
 ﻿using eShop.Application.Service;
 using eShop.Common;
 using eShop.Domain;
+using eShop.Infrastructure.Persistance;
+using eShop.Infrastructure.Projections;
 using eShop.Infrastructure.Services.Application;
 using eShop.Infrastructure.Services.Domain;
 using EventStore.Client;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -25,16 +30,31 @@ namespace eShop.Infrastructure
             RegisterEventTypeNameMappings();
 
             services.AddSingleton(
-                ctx => 
+                ctx =>
                     ConfigureEventStore(
                         configuration["EventStore:ConnectionString"],
-                        ctx.GetService<ILoggerFactory>()
+                        ctx.GetService<ILoggerFactory>()!
                     )
             );
 
             services.AddSingleton<IAggregateStore, AggregateEventStore>();
             services.AddTransient<IDateTimeService, DateTimeService>();
-            
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(configuration.GetConnectionString("eShopProjectionDatabase"),
+                b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddHostedService(ctx =>
+            {
+                return new DatabaseProjectionService(
+                    ctx.GetRequiredService<EventStoreClient>(),
+                    "eShopProjectionDatabase",
+                    ctx
+                    );
+            });
+
             return services;
         }
 

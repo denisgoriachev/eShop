@@ -5,10 +5,14 @@
         <PackageVersion Include="Swashbuckle.AspNetCore" Version="5.6.3" />
         <PackageVersion Include="MediatR" Version="9.0.0" />
         <PackageVersion Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+        <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+        <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
         <PackageVersion Include="EventStore.Client.Grpc.Streams" Version="20.10.0" />
         <PackageVersion Include="FluentValidation" Version="9.5.1" />
         <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.1" />
         <PackageVersion Include="Serilog.AspNetCore" Version="3.4.0" />
         <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.3" />
     </ItemGroup>
 </Project>
