@@ -1,4 +1,5 @@
-﻿using eShop.Application.Service;
+﻿using eShop.Application.Persistance;
+using eShop.Application.Service;
 using eShop.Common;
 using eShop.Domain;
 using eShop.Infrastructure.Persistance;
@@ -27,6 +28,8 @@ namespace eShop.Infrastructure
 
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+
             RegisterEventTypeNameMappings();
 
             services.AddSingleton(
@@ -43,6 +46,9 @@ namespace eShop.Infrastructure
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(configuration.GetConnectionString("eShopProjectionDatabase"),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+            services.AddScoped<ICheckpointProvider, DatabaseCheckpointProvider>();
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
