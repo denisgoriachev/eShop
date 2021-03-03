@@ -7,6 +7,7 @@
         <PackageVersion Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
         <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
         <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
+        <PackageVersion Include="Grpc.Net.Client" Version="2.35.0" />
         <PackageVersion Include="EventStore.Client.Grpc.Streams" Version="20.10.0" />
         <PackageVersion Include="FluentValidation" Version="9.5.1" />
         <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.1" />

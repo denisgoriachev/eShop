@@ -28,8 +28,6 @@ namespace eShop.Infrastructure
 
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-
             RegisterEventTypeNameMappings();
 
             services.AddSingleton(
