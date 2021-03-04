@@ -28,6 +28,8 @@ namespace eShop.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddApplication();
             services.AddInfrastructure(Configuration);
             services.AddApi(Configuration);
@@ -43,6 +45,10 @@ namespace eShop.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "eShop.Api v1"));
             }
 
+            app.UseCors(
+                options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyOrigin()
+            );
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -52,8 +58,7 @@ namespace eShop.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers()
-                    .RequireAuthorization();
+                endpoints.MapControllers();
             });
         }
     }

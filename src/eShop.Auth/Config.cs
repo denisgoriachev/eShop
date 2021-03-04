@@ -28,16 +28,43 @@ namespace eShop.Auth
             {
                 new Client
                 {
+                    ClientName = "eshop-api",
                     ClientId = "eshop-api",
+
+                    // no interactive user, use the clientid/secret for authentication
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+
+                    // secret for authentication
+                    ClientSecrets =
+                    {
+                        new Secret("secret")
+                    },
+
+                    // scopes that client has access to
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "eshop-api"
+                    }
+                },
+                new Client
+                {
+                    ClientName = "eshop-ui",
+                    ClientId = "eshop-ui",
                     ClientSecrets = { new Secret("secret") },
 
                     AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    RequireClientSecret = false,
+
+                    AllowedCorsOrigins = { "https://localhost:5110" },
 
                     // where to redirect to after login
-                    RedirectUris = { "http://localhost:5101/signin-oidc" },
+                    RedirectUris = { "https://localhost:5110/authentication/login-callback" },
 
                     // where to redirect to after logout
-                    PostLogoutRedirectUris = { "http://localhost:5101/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:5110/authentication/logout-callback" },
 
                     AllowedScopes = new List<string>
                     {

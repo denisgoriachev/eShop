@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ui", "ui", "{22E79163-EA72-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Auth", "src\eShop.Auth\eShop.Auth.csproj", "{98CD8894-E003-4E1C-8027-86B070C1F59E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.UI.Blazor", "src\eShop.UI.Blazor\eShop.UI.Blazor.csproj", "{98B74006-52BE-44FA-91EA-20BDFEA95FB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{98CD8894-E003-4E1C-8027-86B070C1F59E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98CD8894-E003-4E1C-8027-86B070C1F59E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98CD8894-E003-4E1C-8027-86B070C1F59E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B74006-52BE-44FA-91EA-20BDFEA95FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B74006-52BE-44FA-91EA-20BDFEA95FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98B74006-52BE-44FA-91EA-20BDFEA95FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B74006-52BE-44FA-91EA-20BDFEA95FB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{FDB7AF13-7A13-4828-8CD4-C3FCFA6752CC} = {DE5B68B1-C765-4730-B38F-3D5335E666CE}
 		{22E79163-EA72-48DD-B599-C7885E43A775} = {DE5B68B1-C765-4730-B38F-3D5335E666CE}
 		{98CD8894-E003-4E1C-8027-86B070C1F59E} = {FDB7AF13-7A13-4828-8CD4-C3FCFA6752CC}
+		{98B74006-52BE-44FA-91EA-20BDFEA95FB0} = {22E79163-EA72-48DD-B599-C7885E43A775}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F8ACF974-B135-4B9F-AB8D-2D80798F8FC2}

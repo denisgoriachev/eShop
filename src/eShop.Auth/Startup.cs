@@ -21,6 +21,7 @@ namespace eShop.Auth
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             // uncomment, if you want to add an MVC-based UI
             services.AddControllersWithViews();
 
@@ -42,6 +43,10 @@ namespace eShop.Auth
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(
+                options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyOrigin()
+            );
 
             // uncomment if you want to add MVC
             app.UseStaticFiles();
