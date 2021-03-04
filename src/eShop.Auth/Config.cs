@@ -58,8 +58,6 @@ namespace eShop.Auth
                     RequirePkce = true,
                     RequireClientSecret = false,
 
-                    AllowedCorsOrigins = { "https://localhost:5110" },
-
                     // where to redirect to after login
                     RedirectUris = { "https://localhost:5110/authentication/login-callback" },
 

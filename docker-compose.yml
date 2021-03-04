@@ -38,11 +38,6 @@ services:
         source: eventstore-volume-logs
         target: /var/log/eventstore
 
-
-
-
 volumes:
   eventstore-volume-data:
   eventstore-volume-logs:   
-
-

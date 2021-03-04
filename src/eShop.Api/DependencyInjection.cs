@@ -20,7 +20,7 @@ namespace eShop.Api
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "http://localhost:5101";
+                    options.Authority = "https://localhost:5101";
 
                     options.TokenValidationParameters = new TokenValidationParameters
                     {

@@ -2,11 +2,13 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using IdentityServer4.Services;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace eShop.Auth
 {
@@ -22,6 +24,7 @@ namespace eShop.Auth
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+
             // uncomment, if you want to add an MVC-based UI
             services.AddControllersWithViews();
 
@@ -35,6 +38,8 @@ namespace eShop.Auth
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
                 .AddTestUsers(TestUsers.Users);
+
+            builder.AddDeveloperSigningCredential();
         }
 
         public void Configure(IApplicationBuilder app)
@@ -45,7 +50,10 @@ namespace eShop.Auth
             }
 
             app.UseCors(
-                options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyOrigin()
+                options => options.
+                    AllowAnyOrigin().
+                    AllowAnyMethod().
+                    AllowAnyHeader()
             );
 
             // uncomment if you want to add MVC

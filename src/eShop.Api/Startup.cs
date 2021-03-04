@@ -46,7 +46,10 @@ namespace eShop.Api
             }
 
             app.UseCors(
-                options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyOrigin()
+                options => options.
+                    AllowAnyOrigin().
+                    AllowAnyMethod().
+                    AllowAnyHeader()
             );
 
             app.UseHttpsRedirection();
