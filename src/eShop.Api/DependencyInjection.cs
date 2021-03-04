@@ -4,7 +4,8 @@ using eShop.Application.Service;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,44 +21,13 @@ namespace eShop.Api
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "https://localhost:5101";
+                    options.Authority = "https://eshop-auth:5101";
 
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateAudience = false
                     };
                 });
-
-            //services.AddAuthentication(options =>
-            //    {
-            //        options.DefaultScheme = "Cookies";
-            //        options.DefaultChallengeScheme = "oidc";
-            //    })
-            //    .AddCookie("Cookies")
-            //    .AddOpenIdConnect("oidc", options =>
-            //    {
-            //        options.Authority = "http://localhost:5101";
-
-            //        // This will allow the container to reach the discovery endpoint
-            //        options.MetadataAddress = "http://eshop-auth/.well-known/openid-configuration";
-            //        options.RequireHttpsMetadata = false;
-
-            //        options.Events.OnRedirectToIdentityProvider = context =>
-            //        {
-            //            // Intercept the redirection so the browser navigates to the right URL in your host
-            //            context.ProtocolMessage.IssuerAddress = "http://localhost:5001/connect/authorize";
-            //            return Task.CompletedTask;
-            //        };
-
-            //        options.ClientId = "eshop-api";
-            //        options.ClientSecret = "secret";
-            //        options.ResponseType = "code";
-
-            //        options.SaveTokens = true;
-
-            //        options.Scope.Add("profile");
-            //        options.GetClaimsFromUserInfoEndpoint = true;
-            //    });
 
             services.AddHttpContextAccessor();
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
@@ -68,32 +38,40 @@ namespace eShop.Api
                 options.Filters.Add<ApiExceptionFilterAttribute>();
             });
 
-            services.AddSwaggerGen(c =>
+            services.AddOpenApiDocument(document =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "eShop.Api", Version = "v1" });
-
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                document.PostProcess = document =>
                 {
-                    In = ParameterLocation.Header,
-                    Description = "Please insert JWT with Bearer into field",
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey
-                });
-
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
+                    document.Info.Version = "v1";
+                    document.Info.Title = "eShop API";
+                    document.Info.Description = "DDD + CQRS eShop API";
+                    document.Info.TermsOfService = "None";
+                    document.Info.Contact = new NSwag.OpenApiContact
                     {
-                        new OpenApiSecurityScheme
+                        Name = "Denis Goriachev",
+                    };
+                };
+
+                document.AddSecurity("OAuth2", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+                {
+                    Type = OpenApiSecuritySchemeType.OAuth2,
+                    Description = "My Authentication",
+                    Flows = new OpenApiOAuthFlows()
+                    {
+                        AuthorizationCode = new OpenApiOAuthFlow()
                         {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
+                            AuthorizationUrl = "https://localhost:5101/connect/authorize",
+                            TokenUrl = "https://localhost:5101/connect/token",
+                            Scopes = new Dictionary<string, string>
+                            {
+                                {"eshop-api", "eShop API access"}
+                            }
                         }
-                        },
-                        new string[] { }
                     }
                 });
+
+                document.OperationProcessors.Add(
+                    new OperationSecurityScopeProcessor("OAuth2"));
             });
 
             return services;

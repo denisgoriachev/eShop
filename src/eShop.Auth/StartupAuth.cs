@@ -12,11 +12,11 @@ using Microsoft.Extensions.Logging;
 
 namespace eShop.Auth
 {
-    public class Startup
+    public class StartupAuth
     {
         public IWebHostEnvironment Environment { get; }
 
-        public Startup(IWebHostEnvironment environment)
+        public StartupAuth(IWebHostEnvironment environment)
         {
             Environment = environment;
         }

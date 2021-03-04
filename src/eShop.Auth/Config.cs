@@ -70,6 +70,29 @@ namespace eShop.Auth
                         IdentityServerConstants.StandardScopes.Profile,
                         "eshop-api"
                     }
+                },
+                new Client
+                {
+                    ClientName = "eshop-swagger",
+                    ClientId = "eshop-swagger",
+                    ClientSecrets = { new Secret("secret") },
+
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    RequireClientSecret = false,
+
+                    // where to redirect to after login
+                    RedirectUris = { "https://localhost:5100/swagger/oauth2-redirect.html" },
+
+                    // where to redirect to after logout
+                    PostLogoutRedirectUris = { "https://localhost:5101/authentication/logout-callback" },
+
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "eshop-api"
+                    }
                 }
             };
     }

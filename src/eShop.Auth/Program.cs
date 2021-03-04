@@ -54,7 +54,7 @@ namespace eShop.Auth
                 .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<StartupAuth>();
                 });
     }
 }

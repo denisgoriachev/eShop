@@ -2,7 +2,7 @@
     <ItemGroup>
         <PackageVersion Include="System.Text.Json" Version="5.0.1" />
         <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
-        <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.0.7" />
+        <PackageVersion Include="NSwag.AspNetCore" Version="13.10.7" />
         <PackageVersion Include="MediatR" Version="9.0.0" />
         <PackageVersion Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
         <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />

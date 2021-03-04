@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +15,9 @@ using System.Threading.Tasks;
 
 namespace eShop.Api
 {
-    public class Startup
+    public class StartupApi
     {
-        public Startup(IConfiguration configuration)
+        public StartupApi(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -41,8 +40,16 @@ namespace eShop.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "eShop.Api v1"));
+                app.UseOpenApi();
+                app.UseSwaggerUi3(options =>
+                {
+                    options.OAuth2Client = new NSwag.AspNetCore.OAuth2ClientSettings()
+                    {
+                        ClientId = "eshop-swagger",
+                        AppName = "eShop API - Swagger",
+                        UsePkceWithAuthorizationCodeGrant = true
+                    };
+                });
             }
 
             app.UseCors(
