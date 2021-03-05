@@ -1,5 +1,5 @@
 ﻿using eShop.Api.Product.Models;
-using eShop.Application.Product.CreateProduct;
+using eShop.Application.Features.Product.CreateProduct;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

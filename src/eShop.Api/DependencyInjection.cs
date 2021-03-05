@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace eShop.Api
@@ -26,6 +27,15 @@ namespace eShop.Api
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateAudience = false
+                    };
+
+                    //TODO: This is only for testing purposes because of certificates mismatch within docker compose
+                    options.BackchannelHttpHandler = new HttpClientHandler()
+                    {
+                        ServerCertificateCustomValidationCallback = (message, certificate, chain, errors) =>
+                        {
+                            return true;
+                        }
                     };
                 });
 

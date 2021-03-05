@@ -1,5 +1,4 @@
 ﻿using eShop.Application.Persistance;
-using eShop.Application.Service;
 using eShop.Common;
 using eShop.Domain;
 using eShop.Infrastructure.Persistance;

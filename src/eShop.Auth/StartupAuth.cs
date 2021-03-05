@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Security.Cryptography.X509Certificates;
 
 namespace eShop.Auth
 {
@@ -37,9 +38,11 @@ namespace eShop.Auth
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
-                .AddTestUsers(TestUsers.Users);
+                .AddTestUsers(TestUsers.Users)
+                .AddDeveloperSigningCredential();
 
-            builder.AddDeveloperSigningCredential();
+            //var certificate = new X509Certificate2("/root/.aspnet/https/eShop.Auth.pfx", "c1e205c9-0d53-4df6-ad2f-b314f6651d85");
+            //builder.AddSigningCredential(certificate);
         }
 
         public void Configure(IApplicationBuilder app)

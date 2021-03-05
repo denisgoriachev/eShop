@@ -1,4 +1,5 @@
 ﻿using eShop.Application.Service;
+using eShop.Common;
 using eShop.Domain;
 using MediatR;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace eShop.Application.Product.CreateProduct
+namespace eShop.Application.Features.Product.CreateProduct
 {
     public record CreateProductCommand(string SKU, string Name, string Description) : IRequest<Guid>;
 
@@ -30,11 +31,11 @@ namespace eShop.Application.Product.CreateProduct
             var id = Guid.NewGuid();
 
             var product = Domain.Entities.Product.Create(
-                id, 
-                request.SKU, 
-                request.Name, 
-                request.Description, 
-                _currentUserService.UserId, 
+                id,
+                request.SKU,
+                request.Name,
+                request.Description,
+                _currentUserService.UserId,
                 _dateTimeService.Now);
 
             await _store.Save(product);

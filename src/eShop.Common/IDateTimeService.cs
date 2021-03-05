@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eShop.Application.Service
+namespace eShop.Common
 {
     public interface IDateTimeService
     {

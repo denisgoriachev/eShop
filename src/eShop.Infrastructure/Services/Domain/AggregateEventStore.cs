@@ -58,17 +58,17 @@ namespace eShop.Infrastructure.Services.Domain
 
             aggregate.ClearChanges();
 
-            static EventData CreateEventData(IDomainEvent e)
+            static EventData CreateEventData(object domainEvent)
             {
-                var eventMetadata = new EventMetadata(e.GetType().FullName ?? throw new Exception($"Type fullname is null for domain event {e.GetType()}"))
+                var eventMetadata = new EventMetadata(domainEvent.GetType().FullName ?? throw new Exception($"Type fullname is null for domain event {domainEvent.GetType()}"))
                 {
                     CorrelationId = Activity.Current?.Id ?? ""
                 };
 
                 return new EventData(
                     Uuid.NewUuid(),
-                    EventTypeMap.GetTypeName(e),
-                    JsonSerializer.SerializeToUtf8Bytes(e),
+                    EventTypeMap.GetTypeName(domainEvent),
+                    JsonSerializer.SerializeToUtf8Bytes(domainEvent),
                     JsonSerializer.SerializeToUtf8Bytes(eventMetadata)
                 );
             }
