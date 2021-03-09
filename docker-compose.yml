@@ -7,7 +7,10 @@ services:
     build:
       context: .
       dockerfile: src/eShop.Api/Dockerfile
-
+    depends_on:
+      - eshop-esdb
+      - eshop-kafka
+      - eshop-auth
   eshop-auth:
     container_name: eshop-auth
     image: ${DOCKER_REGISTRY-}eshopauth
@@ -31,3 +34,18 @@ services:
       - "1113:1113"
       - "2113:2113"
 
+  eshop-zookeeper:
+    container_name: eshop-zookeeper
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+  eshop-kafka:
+    container_name: eshop-kafka
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: eshop-zookeeper:2181
+    depends_on:
+      - eshop-zookeeper

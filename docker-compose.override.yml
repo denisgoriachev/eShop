@@ -14,6 +14,7 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/eShop/eshop-api:/var/eshop/eshop-api
+
   eshop-auth:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -24,7 +25,12 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
   eshop-esdb:
     volumes:
       - ${APPDATA}/eShop/eshop-esdb/eventstore-volume-data:/var/lib/eventstore
       - ${APPDATA}/eShop/eshop-esdb/eventstore-volume-logs:/var/log/eventstore
+
+  eshop-kafka:
+    volumes:
+      - ${APPDATA}/eShop/eshop-kafka/docker.sock:/var/run/docker.sock
