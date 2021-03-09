@@ -5,12 +5,15 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionStrings__eShopProjectionDatabase=Data Source=/var/eshop/eshop-api/eShopProjectionDatabase.db
+      - Serilog__WriteTo__1__Args__path=/var/eshop/eshop-api/logs/log-#.txt
     ports:
       - "80"
       - "5100:443"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/eShop/eshop-api:/var/eshop/eshop-api
   eshop-auth:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -23,5 +26,5 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
   eshop-esdb:
     volumes:
-      - ${APPDATA}/eShop/eventstore-volume-data:/var/lib/eventstore
-      - ${APPDATA}/eShop/eventstore-volume-logs:/var/log/eventstore
+      - ${APPDATA}/eShop/eshop-esdb/eventstore-volume-data:/var/lib/eventstore
+      - ${APPDATA}/eShop/eshop-esdb/eventstore-volume-logs:/var/log/eventstore
