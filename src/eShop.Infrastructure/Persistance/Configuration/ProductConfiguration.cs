@@ -15,7 +15,7 @@ namespace eShop.Infrastructure.Persistance.Configuration
         {
             builder.IsUnique();
 
-            builder.Property(e => e.SKU)
+            builder.Property(e => e.VendorCode)
                 .IsRequired()
                 .HasMaxLength(256);
 

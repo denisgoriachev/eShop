@@ -10,7 +10,7 @@ namespace eShop.Application.Persistance
     {
         public Guid Id { get; set; }
 
-        public string SKU { get; set; } = null!;
+        public string VendorCode { get; set; } = null!;
 
         public string Name { get; set; } = null!;
 

@@ -10,11 +10,11 @@ namespace eShop.Domain.Events
     {
         public static class V1
         {
-            public record CreateProduct(Guid ProductId, string SKU, string Name, string Description, string CreatedBy, DateTime CreatedAt) : IDomainEvent;
+            public record CreateProduct(Guid ProductId, string VendorCode, string Name, string Description, string CreatedBy, DateTime CreatedAt) : IDomainEvent;
 
-            public record UpdateProductSKU(Guid ProductId, string SKU, string UpdatedBy, DateTime UpdatedAt) : IDomainEvent;
+            public record UpdateProductSKU(Guid ProductId, string VendorCode, string UpdatedBy, DateTime UpdatedAt) : IDomainEvent;
 
-            public record UpdateProductInformation(Guid ProductId, string Name, string Description, string UpdatedBy, DateTime UpdatedAt) : IDomainEvent;
+            public record UpdateProductInformation(Guid ProductId, string VendorCode, string Description, string UpdatedBy, DateTime UpdatedAt) : IDomainEvent;
         }
     }
 }

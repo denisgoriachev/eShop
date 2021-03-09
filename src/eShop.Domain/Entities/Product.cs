@@ -70,7 +70,7 @@ namespace eShop.Domain.Entities
                 case V1.CreateProduct e:
                     {
                         Id = e.ProductId;
-                        SKU = e.SKU;
+                        SKU = e.VendorCode;
                         Name = e.Name;
                         Description = e.Description;
                         CreateBy = e.CreatedBy;
@@ -79,14 +79,14 @@ namespace eShop.Domain.Entities
                     }
                 case V1.UpdateProductSKU e:
                     {
-                        SKU = e.SKU;
+                        SKU = e.VendorCode;
                         UpdatedBy = e.UpdatedBy;
                         UpdatedAt = e.UpdatedAt;
                         break;
                     }
                 case V1.UpdateProductInformation e:
                     {
-                        Name = e.Name;
+                        Name = e.VendorCode;
                         Description = e.Description;
                         UpdatedBy = e.UpdatedBy;
                         UpdatedAt = e.UpdatedAt;

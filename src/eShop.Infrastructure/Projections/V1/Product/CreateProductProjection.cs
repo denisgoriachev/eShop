@@ -23,7 +23,7 @@ namespace eShop.Infrastructure.Projections.Product
             var product = new Application.Persistance.Product()
             {
                 Id = domainEvent.ProductId,
-                SKU = domainEvent.SKU,
+                VendorCode = domainEvent.VendorCode,
                 Name = domainEvent.Name,
                 Description = domainEvent.Description,
                 CreatedAt = domainEvent.CreatedAt,

@@ -24,7 +24,7 @@ namespace eShop.Infrastructure.Persistance.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    SKU = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    VendorCode = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 1024, nullable: false),
                     Description = table.Column<string>(type: "TEXT", maxLength: 4096, nullable: false),
                     CreatedBy = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),

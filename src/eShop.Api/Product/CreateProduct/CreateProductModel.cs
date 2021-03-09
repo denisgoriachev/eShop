@@ -5,5 +5,5 @@ using System.Threading.Tasks;
 
 namespace eShop.Api.Product.Models
 {
-    public record CreateProductModel(string SKU, string Name, string Description);
+    public record CreateProductModel(string VendorCode, string Name, string Description);
 }

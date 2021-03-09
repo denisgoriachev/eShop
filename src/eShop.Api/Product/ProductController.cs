@@ -1,5 +1,8 @@
 ﻿using eShop.Api.Product.Models;
+using eShop.Application.Features.Product;
 using eShop.Application.Features.Product.CreateProduct;
+using eShop.Application.Features.Product.GetProduct;
+using eShop.Application.Features.Product.GetProducts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,11 +16,27 @@ namespace eShop.Api.Product
     public class ProductController : AbstractApiController
     {
         [HttpPost]
-        public async Task<Guid> Add(CreateProductModel model)
+        public async Task<ActionResult<Guid>> Add(CreateProductModel model)
         {
-            var result = await Mediator.Send(new CreateProductCommand(model.SKU, model.Name, model.Description));
-            
-            return result;
+            var result = await Mediator.Send(new CreateProductCommand(model.VendorCode, model.Name, model.Description));
+
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductDto>> Get(Guid id)
+        {
+            var result = await Mediator.Send(new GetProductQuery(id));
+
+            return Ok(result);
+        }
+
+        [HttpGet("all")]
+        public async Task<ActionResult<ProductDto>> All()
+        {
+            var result = await Mediator.Send(new GetProductsQuery());
+
+            return Ok(result);
         }
     }
 }
