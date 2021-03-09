@@ -29,6 +29,7 @@ namespace eShop.Api
                         ValidateAudience = false
                     };
 
+#if DEBUG
                     //TODO: This is only for testing purposes because of certificates mismatch within docker compose
                     options.BackchannelHttpHandler = new HttpClientHandler()
                     {
@@ -37,6 +38,7 @@ namespace eShop.Api
                             return true;
                         }
                     };
+#endif
                 });
 
             services.AddHttpContextAccessor();

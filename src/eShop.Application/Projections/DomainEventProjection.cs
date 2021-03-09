@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eShop.Infrastructure.Projections
+namespace eShop.Application.Projections
 {
     public record DomainEventProjection<TDomainEvent> : INotification
         where TDomainEvent : IDomainEvent

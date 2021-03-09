@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace eShop.Infrastructure.Projections
+namespace eShop.Application.Projections
 {
     public abstract class DomainEventProjectionHandler<TDomainEvent> : INotificationHandler<DomainEventProjection<TDomainEvent>>
         where TDomainEvent : IDomainEvent

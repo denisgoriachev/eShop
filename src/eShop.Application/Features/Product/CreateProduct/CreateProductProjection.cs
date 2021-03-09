@@ -1,4 +1,5 @@
 ﻿using eShop.Application.Persistance;
+using eShop.Application.Projections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using static eShop.Domain.Events.ProductEvents.V1;
 
-namespace eShop.Infrastructure.Projections.Product
+namespace eShop.Application.Features.Product.CreateProduct
 {
-    public class CreateProductProjectionHandler : DomainEventProjectionHandler<CreateProduct>
+    public class CreateProductProjectionHandler : DomainEventProjectionHandler<ProductCreated>
     {
         private readonly IApplicationDbContext _context;
 
@@ -18,9 +19,9 @@ namespace eShop.Infrastructure.Projections.Product
             _context = context;
         }
 
-        public override async Task HandleEvent(CreateProduct domainEvent, CancellationToken cancellationToken)
+        public override async Task HandleEvent(ProductCreated domainEvent, CancellationToken cancellationToken)
         {
-            var product = new Application.Persistance.Product()
+            var product = new Persistance.Product()
             {
                 Id = domainEvent.ProductId,
                 VendorCode = domainEvent.VendorCode,

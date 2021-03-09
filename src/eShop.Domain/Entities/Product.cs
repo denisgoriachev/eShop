@@ -41,7 +41,7 @@ namespace eShop.Domain.Entities
 
             var product = new Product();
 
-            product.Apply(new V1.CreateProduct(id, sku, name, description, createdBy, createdAt));
+            product.Apply(new V1.ProductCreated(id, sku, name, description, createdBy, createdAt));
 
             return product;
         }
@@ -52,7 +52,7 @@ namespace eShop.Domain.Entities
             Ensure.IsNotNullOrWhiteSpace("Product Description", description);
             Ensure.IsNotNullOrWhiteSpace("Product Updater", updatedBy);
 
-            Apply(new V1.UpdateProductInformation(Id, name, description, updatedBy, updatedAt));
+            Apply(new V1.ProductInformationUpdated(Id, name, description, updatedBy, updatedAt));
         }
 
         public void ChangeSKU(string sku, string updatedBy, DateTime updatedAt)
@@ -60,14 +60,14 @@ namespace eShop.Domain.Entities
             Ensure.IsNotNullOrWhiteSpace("Product Name", sku);
             Ensure.IsNotNullOrWhiteSpace("Product Updater", updatedBy);
 
-            Apply(new V1.UpdateProductSKU(Id, sku, updatedBy, updatedAt));
+            Apply(new V1.ProductVendorCodeUpdated(Id, sku, updatedBy, updatedAt));
         }
 
         protected override void When(IDomainEvent domainEvent)
         {
             switch (domainEvent)
             {
-                case V1.CreateProduct e:
+                case V1.ProductCreated e:
                     {
                         Id = e.ProductId;
                         SKU = e.VendorCode;
@@ -77,14 +77,14 @@ namespace eShop.Domain.Entities
                         CreatedAt = e.CreatedAt;
                         break;
                     }
-                case V1.UpdateProductSKU e:
+                case V1.ProductVendorCodeUpdated e:
                     {
                         SKU = e.VendorCode;
                         UpdatedBy = e.UpdatedBy;
                         UpdatedAt = e.UpdatedAt;
                         break;
                     }
-                case V1.UpdateProductInformation e:
+                case V1.ProductInformationUpdated e:
                     {
                         Name = e.VendorCode;
                         Description = e.Description;

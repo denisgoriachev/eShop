@@ -47,8 +47,6 @@ namespace eShop.Infrastructure
             services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
             services.AddScoped<ICheckpointProvider, DatabaseCheckpointProvider>();
 
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-
             services.AddHostedService(ctx =>
             {
                 return new DatabaseProjectionService(

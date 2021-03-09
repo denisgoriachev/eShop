@@ -1,4 +1,5 @@
-﻿using eShop.Infrastructure.Persistance;
+﻿using eShop.Application.Projections;
+using eShop.Infrastructure.Persistance;
 using EventStore.Client;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
