@@ -21,3 +21,11 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  eshop-esdb:
+    volumes:
+      - type: volume
+        source: eventstore-volume-data
+        target: /var/lib/eventstore
+      - type: volume
+        source: eventstore-volume-logs
+        target: /var/log/eventstore

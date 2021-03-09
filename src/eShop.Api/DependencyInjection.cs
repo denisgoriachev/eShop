@@ -22,7 +22,7 @@ namespace eShop.Api
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "https://eshop-auth:5101";
+                    options.Authority = "https://eshop-auth:443";
 
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
