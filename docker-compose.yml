@@ -31,7 +31,3 @@ services:
       - "1113:1113"
       - "2113:2113"
 
-
-volumes:
-  eventstore-volume-data:
-  eventstore-volume-logs:   
