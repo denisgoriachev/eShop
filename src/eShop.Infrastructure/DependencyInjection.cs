@@ -1,9 +1,11 @@
 ﻿using eShop.Application.Persistance;
+using eShop.Application.Service;
 using eShop.Common;
 using eShop.Domain;
 using eShop.Infrastructure.Persistance;
 using eShop.Infrastructure.Projections;
 using eShop.Infrastructure.Services.Application;
+using eShop.Infrastructure.Services.Application.BusPublisher;
 using eShop.Infrastructure.Services.Domain;
 using EventStore.Client;
 using MediatR;
@@ -55,6 +57,9 @@ namespace eShop.Infrastructure
                     ctx
                     );
             });
+
+            services.AddSingleton<KafkaClientHandle>();
+            services.AddSingleton<IBusPublisher, KafkaBusPublisher>();
 
             return services;
         }

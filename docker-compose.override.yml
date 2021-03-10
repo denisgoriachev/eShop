@@ -34,3 +34,4 @@ services:
   eshop-kafka:
     volumes:
       - ${APPDATA}/eShop/eshop-kafka/docker.sock:/var/run/docker.sock
+      - ${APPDATA}/eShop/eshop-kafka/kafka:/kafka
