@@ -29,6 +29,7 @@ namespace eShop.Infrastructure.Services.Application.BusPublisher
         {
             var conf = new ProducerConfig();
             config.GetSection("Kafka:ProducerSettings").Bind(conf);
+
             this.kafkaProducer = new ProducerBuilder<byte[], byte[]>(conf).Build();
         }
 

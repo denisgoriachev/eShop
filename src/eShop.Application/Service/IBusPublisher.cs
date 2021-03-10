@@ -11,6 +11,6 @@ namespace eShop.Application.Service
     {
         Task PublishAsync<TMessage>(string topic, TMessage message, CancellationToken cancelationToken = default);
 
-        void Publish<TMessage>(string topic, TMessage message, CancellationToken cancelationToken = default);
+        void Publish<TMessage>(string topic, TMessage message);
     }
 }

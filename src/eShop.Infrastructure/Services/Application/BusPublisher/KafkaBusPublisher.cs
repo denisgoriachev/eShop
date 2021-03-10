@@ -16,32 +16,33 @@ namespace eShop.Infrastructure.Services.Application
     {
         private readonly KafkaClientHandle _clientHandle;
         private readonly IDateTimeService _dateTimeService;
-        private readonly IProducer<Null, string> _jsonProducer;
+        private readonly IProducer<Null, byte[]> _jsonProducer;
 
         public KafkaBusPublisher(KafkaClientHandle clientHandle, IDateTimeService dateTimeService)
         {
             _clientHandle = clientHandle;
             _dateTimeService = dateTimeService;
 
-            _jsonProducer = new DependentProducerBuilder<Null, string>(_clientHandle.Handle).Build();
+            _jsonProducer = new DependentProducerBuilder<Null, byte[]>(_clientHandle.Handle)
+                .Build();
         }
 
         public Task PublishAsync<TMessage>(string topic, TMessage message, CancellationToken cancelationToken = default)
         {
             return _jsonProducer.ProduceAsync(topic,
-                new Message<Null, string>()
+                new Message<Null, byte[]>()
                 {
-                    Value = JsonSerializer.Serialize(message, typeof(TMessage)),
+                    Value = JsonSerializer.SerializeToUtf8Bytes(message, typeof(TMessage)),
                     Timestamp = new Timestamp(_dateTimeService.Now)
-                });
+                }, cancelationToken);
         }
 
-        public void Publish<TMessage>(string topic, TMessage message, CancellationToken cancelationToken)
+        public void Publish<TMessage>(string topic, TMessage message)
         {
             _jsonProducer.Produce(topic, 
-                new Message<Null, string>() 
+                new Message<Null, byte[]>() 
                 { 
-                    Value = JsonSerializer.Serialize(message, typeof(TMessage)),
+                    Value = JsonSerializer.SerializeToUtf8Bytes(message, typeof(TMessage)),
                     Timestamp = new Timestamp(_dateTimeService.Now)
                 });
         }
