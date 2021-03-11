@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace eShop.Api
@@ -22,23 +23,13 @@ namespace eShop.Api
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "https://eshop-auth:443";
+                    options.Authority = "http://eshop-auth:80";
+                    options.RequireHttpsMetadata = false;
 
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateAudience = false
                     };
-
-#if DEBUG
-                    //TODO: This is only for testing purposes because of certificates mismatch within docker compose
-                    options.BackchannelHttpHandler = new HttpClientHandler()
-                    {
-                        ServerCertificateCustomValidationCallback = (message, certificate, chain, errors) =>
-                        {
-                            return true;
-                        }
-                    };
-#endif
                 });
 
             services.AddHttpContextAccessor();
