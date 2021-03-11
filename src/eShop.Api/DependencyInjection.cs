@@ -28,7 +28,8 @@ namespace eShop.Api
 
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateAudience = false
+                        ValidateAudience = true,
+                        ValidAudience = "eShop"
                     };
                 });
 
@@ -67,7 +68,7 @@ namespace eShop.Api
                             TokenUrl = "https://localhost:5101/connect/token",
                             Scopes = new Dictionary<string, string>
                             {
-                                {"eshop-api", "eShop API access"}
+                                {"eShop.admin", "eShop API Admin Access"}
                             }
                         }
                     }

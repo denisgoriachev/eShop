@@ -33,10 +33,12 @@ namespace eShop.Auth
 
             var builder = services.AddIdentityServer(options =>
                 {
-                    options.IssuerUri = "https://localhost:5101";
+                    options.IssuerUri = "eshop-auth";
+                    options.EmitStaticAudienceClaim = true;
                 })
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
+                .AddInMemoryApiResources(Config.ApiResources)
                 .AddInMemoryClients(Config.Clients)
                 .AddTestUsers(TestUsers.Users)
                 .AddDeveloperSigningCredential();

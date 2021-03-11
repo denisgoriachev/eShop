@@ -20,7 +20,17 @@ namespace eShop.Auth
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
             {
-                new ApiScope("eshop-api", "eShop API")
+                new ApiScope("eShop.admin", "eShop Administrator"),
+                new ApiScope("eShop.user", "eShop User")
+            };
+
+        public static IEnumerable<ApiResource> ApiResources =>
+            new ApiResource[]
+            {
+                new ApiResource("eShop", "eShop API")
+                {
+                    Scopes = { "eShop.admin", "eShop.user" }
+                }
             };
 
         public static IEnumerable<Client> Clients =>
@@ -68,7 +78,8 @@ namespace eShop.Auth
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "eshop-api"
+                        "eShop.user",
+                        "eShop.admin"
                     }
                 },
                 new Client
@@ -91,7 +102,7 @@ namespace eShop.Auth
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "eshop-api"
+                        "eShop.admin"
                     }
                 }
             };
