@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace eShop.Domain
 {
-    public abstract class Aggregate
+    public abstract class Aggregate : Entity
     {
         private readonly List<IDomainEvent> _changes = new();
         private readonly List<IDomainEvent> _history = new();
-
-        public Guid Id { get; protected set; }
 
         public long Version { get; private set; } = -1;
 

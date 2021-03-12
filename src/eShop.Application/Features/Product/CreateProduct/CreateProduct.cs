@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace eShop.Application.Features.Product.CreateProduct
 {
-    public record CreateProductCommand(string SKU, string Name, string Description) : IRequest<Guid>;
+    public record CreateProductCommand(string VendorCode, string Name, decimal Price, string Currency, string Description) : IRequest<Guid>;
 
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Guid>
     {
@@ -30,9 +30,9 @@ namespace eShop.Application.Features.Product.CreateProduct
         {
             var id = Guid.NewGuid();
 
-            var product = Domain.Entities.Product.Create(
+            var product = Domain.Entities.Catalog.Product.Create(
                 id,
-                request.SKU,
+                request.VendorCode,
                 request.Name,
                 request.Description,
                 _currentUserService.UserId,

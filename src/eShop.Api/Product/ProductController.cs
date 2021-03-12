@@ -18,7 +18,7 @@ namespace eShop.Api.Product
         [HttpPost]
         public async Task<ActionResult<Guid>> Add(CreateProductModel model)
         {
-            var result = await Mediator.Send(new CreateProductCommand(model.VendorCode, model.Name, model.Description));
+            var result = await Mediator.Send(new CreateProductCommand(model.VendorCode, model.Name, model.Price, model.Currency, model.Description));
 
             return Ok(result);
         }

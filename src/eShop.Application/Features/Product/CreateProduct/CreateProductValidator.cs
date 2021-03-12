@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using eShop.Domain.ValueObjects;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace eShop.Application.Features.Product.CreateProduct
     {
         public CreateProductCommandValidator()
         {
-            RuleFor(e => e.SKU)
+            RuleFor(e => e.VendorCode)
                 .NotEmpty()
                 .MinimumLength(4)
                 .MaximumLength(128);
@@ -25,6 +26,13 @@ namespace eShop.Application.Features.Product.CreateProduct
                 .NotEmpty()
                 .MinimumLength(12)
                 .MaximumLength(4096);
+
+            RuleFor(e => e.Price)
+                .GreaterThanOrEqualTo(0)
+                .LessThanOrEqualTo(Money.MaxPrice);
+
+            RuleFor(e => e.Currency)
+                .NotEmpty();
         }
     }
 }
